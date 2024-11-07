@@ -1,32 +1,13 @@
 {
-    "version": 2,
-    "builds": [
+  "builds": [{
+      "src": "djangointerviewbot/wsgi.py",
+      "use": "@ardnt/vercel-python-wsgi",
+      "config": { "maxLambdaSize": "15mb" }
+  }],
+  "routes": [
       {
-        "src": "manage.py",
-        "use": "@vercel/python",
-        "config": { "maxLambdaSize": "15mb" }
+          "src": "/(.*)",
+          "dest": "djangointerviewbot/wsgi.py"
       }
-    ],
-    "routes": [
-      {
-        "src": "/static/(.*)",
-        "dest": "/static/$1"
-      },
-      {
-        "src": "/media/(.*)",
-        "dest": "/media/$1"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "manage.py"
-      }
-    ],
-    "env": {
-      "DJANGO_SETTINGS_MODULE": "your_project.settings",
-      "SECRET_KEY": "your_secret_key",
-      "DEBUG": "false",
-      "DATABASE_URL": "your_database_url",
-      "ALLOWED_HOSTS": "your_vercel_domain.vercel.app"
-    }
-  }
-  
+  ]
+}
